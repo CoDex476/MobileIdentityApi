@@ -1,0 +1,57 @@
+
+# Build output
+bin/
+obj/
+publish/
+
+# User-specific files
+*.user
+*.suo
+*.userprefs
+*.vs/
+
+# Rider / JetBrains
+.idea/
+*.sln.iml
+
+# Visual Studio Code
+.vscode/
+
+# NuGet
+*.nupkg
+packages/
+*.nuget.props
+*.nuget.targets
+
+# Logs
+*.log
+TestResults/
+
+appsettings.json
+appsettings.*.json
+secrets.json
+**/secrets.json
+
+# Certificates and keys
+*.pfx
+*.pem
+*.key
+*.crt
+
+# Environment variables files
+.env
+*.env
+
+*.tmp
+*.cache
+*.swp
+
+# Azure publish / deployment settings
+*.azurePubxml
+*.publishsettings
+PublishScripts/
+
+~$*
+*~
+Backup*/
+_UpgradeReport_Files/
