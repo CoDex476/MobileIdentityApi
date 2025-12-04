@@ -25,7 +25,6 @@ namespace MobileIdentityApi.Services
             var query = @"
                 SELECT 
                     MOBILE_NO AS MobileNo,
-                    CUSTOMER_ID AS CustomerId,
                     KYC_ID AS KycId
                 FROM MOBAPP_USERS
                 WHERE MOBILE_NO = @MobileNumber";
