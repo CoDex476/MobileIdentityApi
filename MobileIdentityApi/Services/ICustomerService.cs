@@ -7,5 +7,6 @@ namespace MobileIdentityApi.Services
         Task<Customer?> GetCustomerByPhoneAsync(string phoneNumber);
         Task<CustomerInfo?> GetCustomerInfoAsync(string kycId);
         Task<AccountDetail?> GetAccountDetailAsync(string kycId);
+        Task<IEnumerable<Account>> GetAccountsByCustomerIdAsync(string customerId);
     }
 }

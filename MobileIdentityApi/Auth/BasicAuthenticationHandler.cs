@@ -94,7 +94,8 @@ namespace MobileIdentityApi.Auth
 
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.NameIdentifier, customerDetails.KycId)
+                    new Claim(ClaimTypes.NameIdentifier, customerDetails.KycId),
+                    new Claim("CustomerId", customerDetails.CustomerId)
                 };
 
                 var identity = new ClaimsIdentity(claims, Scheme.Name);

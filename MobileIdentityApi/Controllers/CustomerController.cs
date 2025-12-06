@@ -83,5 +83,47 @@ namespace MobileIdentityApi.Controllers
                 return StatusCode(500, new { error = "An unexpected error occurred" });
             }
         }
+
+        [HttpGet("{customerId}/accounts")]
+        [Authorize]
+        public async Task<IActionResult> GetAccountsByCustomerId(string customerId)
+        {
+            if (string.IsNullOrWhiteSpace(customerId))
+            {
+                _logger.LogWarning("GetAccountsByCustomerId called with empty customerId");
+                return BadRequest(new { error = "Customer ID is required" });
+            }
+
+            var userCustomerId = User.FindFirstValue("CustomerId");
+            if (userCustomerId != customerId)
+            {
+                _logger.LogWarning("Unauthorized access attempt for CustomerId {customerId}", 
+                    customerId);
+                return Unauthorized(new { error = "Not authorized" });
+            }
+
+            try
+            {
+                var accounts = await _customerService.GetAccountsByCustomerIdAsync(customerId);
+
+                if (accounts == null || !accounts.Any())
+                {
+                    _logger.LogWarning("No accounts found for CustomerId {customerId}", customerId);
+                    return NotFound(new { error = "No accounts found for this customer" });
+                }
+
+                _logger.LogInformation("Retrieved {count} accounts for CustomerId {customerId}",
+                    accounts.Count(), customerId);
+
+                return Ok(accounts);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error retrieving accounts for CustomerId {customerId}",
+                    customerId);
+                return StatusCode(500, new { error = "An unexpected error occurred" });
+            }
+        }
+
     }
 }
